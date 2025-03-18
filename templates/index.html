@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brake Failure Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Brake Failure Prediction</h1>
+        <form action="{{ url_for('predict') }}" method="POST">
+            <label for="year_of_manufacture">Year of Manufacture:</label>
+            <input type="number" id="year_of_manufacture" name="Year of Manufacture" required>
+            
+            <label for="mileage">Mileage (km):</label>
+            <input type="number" id="mileage" name="Mileage (km)" required>
+            
+            <label for="brake_pad_thickness">Brake Pad Thickness (mm):</label>
+            <input type="number" step="0.01" id="brake_pad_thickness" name="Brake Pad Thickness (mm)" required>
+            
+            <label for="maintenance_type">Maintenance Type:</label>
+            <select id="maintenance_type" name="Maintenance Type" required>
+                <option value="Routine Maintenance">Routine Maintenance</option>
+                <option value="Repair">Repair</option>
+                <option value="1 time">1 time</option>
+                <option value="2 time">2 time</option>
+                <option value="3 time">3 time</option>
+                <option value="n time">n time</option>
+            </select>
+            
+            <label for="brake_fluid_level">Brake Fluid Level (%):</label>
+            <input type="number" step="0.01" id="brake_fluid_level" name="Brake Fluid Level (%)" required>
+            
+            <label for="brake_temperature">Brake Temperature (°C):</label>
+            <input type="number" step="0.01" id="brake_temperature" name="Brake Temperature (°C)" required>
+            
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>

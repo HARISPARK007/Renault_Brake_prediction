@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Results</h1>
+        
+        <!-- Final Prediction -->
+        <h2>Final Prediction: {{ final_prediction }}</h2>
+        
+        <!-- Model Predictions -->
+        <h3>Model Predictions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Prediction</th>
+                    <th>Probability (Yes)</th>
+                    <th>Probability (No)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model, result in predictions.items() %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ result.prediction }}</td>
+                    <td>{{ result.probability_yes }}%</td>
+                    <td>{{ result.probability_no }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Feature Importance -->
+        <h3>Feature Importance</h3>
+        {% for model, importance in feature_importance.items() %}
+        <h4>{{ model }}</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Importance (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feature, value in importance %}
+                <tr>
+                    <td>{{ feature }}</td>
+                    <td>{{ value | round(2) }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endfor %}
+        
+        <a href="{{ url_for('index') }}">Back to Input</a>
+    </div>
+</body>
+</html>
